@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,6 +39,23 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Task> tasks = new ArrayList<>();
+
+    public void addComment(Task task) {
+        tasks.add(task);
+        task.setUser(this);
+    }
+
+    public void removeComment(Task task) {
+        tasks.remove(task);
+        task.setUser(null);
+    }
 
     public User() {
     }
