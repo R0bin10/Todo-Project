@@ -47,12 +47,12 @@ public class User {
     )
     private List<Task> tasks = new ArrayList<>();
 
-    public void addComment(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
         task.setUser(this);
     }
 
-    public void removeComment(Task task) {
+    public void removeTask(Task task) {
         tasks.remove(task);
         task.setUser(null);
     }
@@ -64,6 +64,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Long getId() {
