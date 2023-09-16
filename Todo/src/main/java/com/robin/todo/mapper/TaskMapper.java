@@ -7,11 +7,10 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper()
+@Mapper
 public interface TaskMapper {
 
     TaskMapper INSTANCE = Mappers.getMapper(TaskMapper.class);
 
     List<TaskListResponse> taskListToDto(List<Task> taskList);
-
 }

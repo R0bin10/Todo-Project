@@ -4,11 +4,12 @@ public class TaskListResponse {
 
     private long id;
 
-    private long name;
+    private String name;
 
-    public TaskListResponse(){}
+    public TaskListResponse() {
+    }
 
-    public TaskListResponse(long id, long name) {
+    public TaskListResponse(long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -21,11 +22,11 @@ public class TaskListResponse {
         this.id = id;
     }
 
-    public long getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(long name) {
+    public void setName(String name) {
         this.name = name;
     }
 }

@@ -5,9 +5,9 @@ import com.robin.todo.models.User;
 import com.robin.todo.payload.response.TaskListResponse;
 import com.robin.todo.repository.TaskRepository;
 import com.robin.todo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +30,8 @@ public class TaskServiceImpl implements TaskService {
         Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            List<TaskListResponse> taskListDto = TaskMapper.INSTANCE.taskListToDto(user.getTasks());
-            return taskListDto;
+            return TaskMapper.INSTANCE.taskListToDto(user.getTasks());
         }
-        return null;
+        return new ArrayList<>();
     }
 }
