@@ -1,7 +1,9 @@
 package com.robin.todo.service;
 
 import com.robin.todo.mapper.TaskMapper;
+import com.robin.todo.models.Task;
 import com.robin.todo.models.User;
+import com.robin.todo.payload.request.TaskDTO;
 import com.robin.todo.payload.response.TaskListResponse;
 import com.robin.todo.repository.TaskRepository;
 import com.robin.todo.repository.UserRepository;
@@ -33,5 +35,16 @@ public class TaskServiceImpl implements TaskService {
             return TaskMapper.INSTANCE.taskListToDto(user.getTasks());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public void addNewTaskToUser(String username, TaskDTO taskDTO) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            Task newTask = TaskMapper.INSTANCE.taskDtoToTask(taskDTO);
+            user.addTask(newTask);
+            userRepository.save(user);
+        }
     }
 }

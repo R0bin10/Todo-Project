@@ -13,6 +13,14 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    public Task() {
+    }
+
+    public Task(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
