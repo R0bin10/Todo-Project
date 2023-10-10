@@ -1,6 +1,6 @@
 package com.robin.todo.controller;
 
-import com.robin.todo.payload.request.TaskDTO;
+import com.robin.todo.payload.request.TaskDto;
 import com.robin.todo.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,7 +29,7 @@ public class TaskController {
 
     @PostMapping("/add-task")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> addNewTask(Authentication user, @RequestBody TaskDTO taskDTO){
+    public ResponseEntity<?> addNewTask(Authentication user, @RequestBody TaskDto taskDTO){
         taskService.addNewTaskToUser(user.getName(), taskDTO);
         return ResponseEntity.ok().build();
     }

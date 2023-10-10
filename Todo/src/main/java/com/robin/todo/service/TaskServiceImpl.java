@@ -3,7 +3,7 @@ package com.robin.todo.service;
 import com.robin.todo.mapper.TaskMapper;
 import com.robin.todo.models.Task;
 import com.robin.todo.models.User;
-import com.robin.todo.payload.request.TaskDTO;
+import com.robin.todo.payload.request.TaskDto;
 import com.robin.todo.payload.response.TaskListResponse;
 import com.robin.todo.repository.TaskRepository;
 import com.robin.todo.repository.UserRepository;
@@ -38,11 +38,15 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void addNewTaskToUser(String username, TaskDTO taskDTO) {
+    public void addNewTaskToUser(String username, TaskDto taskDTO) {
         Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            System.out.println(taskDTO.getName());
+            System.out.println(taskDTO.getDescription());
             Task newTask = TaskMapper.INSTANCE.taskDtoToTask(taskDTO);
+            System.out.println(newTask.getDescription());
+            System.out.println(newTask.getName());
             user.addTask(newTask);
             userRepository.save(user);
         }
