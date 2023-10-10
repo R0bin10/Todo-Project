@@ -15,6 +15,7 @@ class TaskMapperTest {
 
         Task task = TaskMapper.INSTANCE.taskDtoToTask(taskDto);
 
+        assertThat(taskDto).isNotNull();
         assertThat(task).isNotNull();
         assertThat(task.getName()).isEqualTo("test");
         assertThat(task.getDescription()).isEqualTo("desc");
